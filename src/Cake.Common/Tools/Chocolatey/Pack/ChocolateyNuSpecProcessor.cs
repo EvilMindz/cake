@@ -109,6 +109,13 @@ namespace Cake.Common.Tools.Chocolatey.Pack
                 document.Save(stream);
             }
 
+            if (_log.Verbosity > Verbosity.Verbose)
+            {
+                // TODO: It would be nice to just flush the file to _log.DebugStream, but it's unavailable. @asbjornu
+                var contents = nuspecFile.ReadToEnd(System.Text.Encoding.UTF8);
+                _log.Debug(contents);
+            }
+
             // Return the new path.
             return nuspecFile.Path;
         }
